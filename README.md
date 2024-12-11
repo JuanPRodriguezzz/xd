@@ -1062,4 +1062,40 @@ class TriRectangle(Triangle):
         a, b, c = sorted(edge.get_length() for edge in self.edges)
         if not abs(c**2 - (a**2 + b**2)) < 1e-9:
             raise ValueError("No es un triángulo rectángulo.")
+
+# main.py
+from Shape import Point, Line, Triangle, Isosceles, Equilateral, Scalene, TriRectangle, Rectangle, Square
+
+if __name__ == "__main__":
+    # Crear puntos
+    p1 = Point(0, 0)
+    p2 = Point(4, 0)
+    p3 = Point(2, 3)
+
+    # Triángulo equilátero
+    try:
+        eq_triangle = Equilateral(Point(0, 0), Point(3, 0), Point(1.5, sqrt(3) * 1.5))
+        print(f"Área del triángulo equilátero: {eq_triangle.compute_area()}")
+        print(f"Perímetro del triángulo equilátero: {eq_triangle.compute_perimeter()}")
+    except ValueError as e:
+        print(e)
+
+    # Triángulo rectángulo
+    try:
+        tri_rectangle = TriRectangle(p1, p2, p3)
+        print(f"Área del triángulo rectángulo: {tri_rectangle.compute_area()}")
+        print(f"Perímetro del triángulo rectángulo: {tri_rectangle.compute_perimeter()}")
+    except ValueError as e:
+        print(e)
+
+    # Rectángulo
+    rect = Rectangle(p1, Point(4, 4))
+    print(f"Área del rectángulo: {rect.compute_area()}")
+    print(f"Perímetro del rectángulo: {rect.compute_perimeter()}")
+
+    # Cuadrado
+    square = Square(p1, 4)
+    print(f"Área del cuadrado: {square.compute_area()}")
+    print(f"Perímetro del cuadrado: {square.compute_perimeter()}")
+
 ```
