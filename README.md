@@ -1099,3 +1099,60 @@ if __name__ == "__main__":
     print(f"Perímetro del cuadrado: {square.compute_perimeter()}")
 
 ```
+### init.py
+Este archivo puede quedarse vacío si no necesitas exponer clases específicas al hacer import geometry. Sin embargo, 
+si deseas que al importar el paquete geometry se carguen directamente ciertas clases, podrías usar importaciones dentro de __init__.py. Por ejemplo:
+Con esto, al hacer from geometry import * estarás importando todas las clases listadas en __all__.
+``` python
+
+# shape/__init__.py
+
+from .exceptions import (
+    InvalidPointException,
+    NegativeDimensionException,
+    DegenerateTriangleException,
+    NotIsoscelesTriangleException,
+    NotEquilateralTriangleException,
+    NotScaleneTriangleException,
+    NotRightTriangleException,
+)
+
+from .point import Point
+from .line import Line
+from .shape import Shape
+from .rectangles import Rectangle, Square
+from .triangles import Triangle, Isosceles, Equilateral, Scalene, TriRectangle
+
+__all__ = [
+    "InvalidPointException",
+    "NegativeDimensionException",
+    "DegenerateTriangleException",
+    "NotIsoscelesTriangleException",
+    "NotEquilateralTriangleException",
+    "NotScaleneTriangleException",
+    "NotRightTriangleException",
+    "Point",
+    "Line",
+    "Shape",
+    "Rectangle",
+    "Square",
+    "Triangle",
+    "Isosceles",
+    "Equilateral",
+    "Scalene",
+    "TriRectangle",
+]
+```
+
+Instalación local (opcional): Si tu paquete está en un proyecto local, solo asegúrate de que el 
+intérprete Python reconozca la carpeta (por ejemplo, con python -m pip install -e . si tienes un setup.py o pyproject.toml).
+
+
+### Conclusiones
+Organizar en paquetes te ayuda a mantener un código limpio, extensible y fácil de mantener.
+Separar los módulos en responsabilidades:
+exceptions.py para todas las excepciones personalizadas.
+point.py, line.py, shape.py, rectangles.py, triangles.py para clases relacionadas.
+En cada clase, se lanza la excepción correspondiente cuando se detecta un caso de error (dimensiones negativas, triángulo degenerado, etc.).
+¡Listo! Con esta estructura, tu paquete geometry queda modularizado y preparado para un crecimiento futuro.
+
